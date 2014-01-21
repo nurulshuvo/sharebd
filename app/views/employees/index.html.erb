@@ -1,0 +1,54 @@
+<%= search_form_for @search do |f| %>
+
+  <%= f.label :name_cont, "Search By Name:" %>
+  <%= f.text_field :name_cont %>
+
+  <%= f.label :home_town_cont, "Search By Home Town:" %>
+  <%= f.text_field :home_town_cont %>
+
+  <%= f.label :gender_cont, "Search By Gender:" %>
+  <%= f.text_field :gender_cont %>
+
+  <%= f.submit "Search" %>
+<% end %>
+<br>
+<h1>Listing employees</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Photo</th>
+      <th>Name</th>
+      <th>Home town</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>Education</th>
+      <th></th>
+      <% if user_signed_in? %>
+      <th></th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= image_tag employee.image_url.to_s %></td>
+        <td><%= employee.name %></td>
+        <td><%= employee.home_town %></td>
+        <td><%= employee.gender %></td>
+        <td><%= employee.age %></td>
+        <td><%= employee.education %></td>
+        <td><%= link_to 'Show', employee %></td>
+        <% if user_signed_in? %>
+        <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if user_signed_in? %>
+  <%= link_to 'New Employee', new_employee_path %>
+<% end %>

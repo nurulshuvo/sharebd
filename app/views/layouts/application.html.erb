@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ShareBd</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <h1>WELCOME TO SHAREBD</h1>
+<% if user_signed_in? %>
+  Welcome Admin :)
+  <%= link_to "Logout", destroy_user_session_path, method: :delete %> <br>
+<% else %>
+  <%= link_to "Login", new_user_session_path %>
+<% end %>
+
+<br>
+<br>
+
+<%= yield %>
+
+</body>
+</html>
